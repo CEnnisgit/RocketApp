@@ -2,6 +2,7 @@
 #define ROCKET_HPP
 
 #include <string>
+#include "Telemetry.hpp" // for Orientation struct
 
 class Rocket {
 private:
@@ -10,6 +11,7 @@ private:
     double velocity;          // in m/s
     int currentStage;         // 1 or 2
     std::string status;       // e.g., "Idle", "Launching", "In Flight"
+    Orientation orientation;  // current rocket orientation
 
 public:
     Rocket();
@@ -18,6 +20,10 @@ public:
     void update(double deltaTime);  // simulate flight each second
     void stageSeparation();
     void abortMission();
+
+    // Orientation accessors
+    void setOrientation(const Orientation &ori);
+    Orientation getOrientation() const;
 
     double getFuelLevel() const;
     double getAltitude() const;
