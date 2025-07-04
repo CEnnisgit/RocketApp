@@ -7,6 +7,8 @@ struct Orientation {
     double roll;  // Barrel roll angle
 };
 
+class Rocket; // forward declaration
+
 class Telemetry {
 private:
     double altitude;
@@ -18,7 +20,7 @@ private:
 public:
     Telemetry();
 
-    void update(double deltaTime);
+    void update(double deltaTime, Rocket* rocket = nullptr);
 
     double getAltitude() const;
     double getVelocity() const;
