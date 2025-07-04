@@ -1,0 +1,6 @@
+# Build artifacts
+*.o
+rocket_sim
+
+# Misc
+*.exe
