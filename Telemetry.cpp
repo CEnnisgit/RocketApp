@@ -1,4 +1,5 @@
 #include "Telemetry.hpp"
+#include "Rocket.hpp"
 #include <cmath>
 #include <cstdlib> // for rand()
 #include <ctime>
@@ -13,7 +14,7 @@ Telemetry::Telemetry() {
     std::srand(std::time(nullptr)); // seed random for small variations
 }
 
-void Telemetry::update(double deltaTime) {
+void Telemetry::update(double deltaTime, Rocket* rocket) {
     // Simulate basic vertical launch acceleration
     acceleration = 30.0 - (altitude / 1000); // throttle back at altitude
     if (acceleration < 5.0) acceleration = 5.0;
@@ -28,6 +29,11 @@ void Telemetry::update(double deltaTime) {
     orientation.pitch += ((rand() % 100 - 50) * 0.01);
     orientation.yaw   += ((rand() % 100 - 50) * 0.01);
     orientation.roll  += ((rand() % 100 - 50) * 0.02);
+
+    // Provide orientation feedback to the rocket if requested
+    if (rocket) {
+        rocket->setOrientation(orientation);
+    }
 }
 
 double Telemetry::getAltitude() const { return altitude; }
