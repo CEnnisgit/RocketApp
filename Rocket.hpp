@@ -9,6 +9,9 @@ private:
     double fuelLevel;         // in percentage (0-100)
     double altitude;          // in meters
     double velocity;          // in m/s
+    double mass;              // in kilograms
+    double thrust;            // in Newtons
+    double dragCoefficient;   // simplistic drag coefficient
     int currentStage;         // 1 or 2
     std::string status;       // e.g., "Idle", "Launching", "In Flight"
     Orientation orientation;  // current rocket orientation

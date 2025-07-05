@@ -5,6 +5,9 @@ Rocket::Rocket() {
     fuelLevel = 100.0;
     altitude = 0.0;
     velocity = 0.0;
+    mass = 50000.0;       // kilograms
+    thrust = 760000.0;    // Newtons
+    dragCoefficient = 0.2;
     currentStage = 1;
     status = "Idle";
     orientation = {0.0, 0.0, 0.0};
@@ -20,9 +23,18 @@ void Rocket::startLaunch() {
 void Rocket::update(double deltaTime) {
     if (status == "Launching" || status == "In Flight") {
         if (fuelLevel > 0) {
-            fuelLevel -= 0.5 * deltaTime; // basic consumption model
-            velocity += 9.8 * deltaTime;  // gravity offset
+            double consumption = (currentStage == 1) ? 1.0 : 0.3;
+            fuelLevel -= consumption * deltaTime; // stage-based consumption
+            if (fuelLevel < 0) fuelLevel = 0;
+
+            double effectiveThrust = (fuelLevel > 0) ? thrust : 0.0;
+            double gravityForce = mass * 9.81;
+            double dragForce = dragCoefficient * velocity * velocity;
+            double acceleration = (effectiveThrust - gravityForce - dragForce) / mass;
+
+            velocity += acceleration * deltaTime;
             altitude += velocity * deltaTime;
+            if (altitude < 0) altitude = 0;
             status = "In Flight";
 
             // Simple attitude control trying to stabilize orientation
