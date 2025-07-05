@@ -1,7 +1,7 @@
 CXX=g++
 CXXFLAGS=-std=c++11 -Wall
 
-SOURCES=main.cpp Rocket.cpp Telemetry.cpp
+SOURCES=main.cpp Rocket.cpp Telemetry.cpp TelemetryLogger.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 TARGET=rocket_sim
 
