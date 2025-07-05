@@ -1,5 +1,6 @@
 #include "Rocket.hpp"
 #include "Telemetry.hpp"
+#include "TelemetryLogger.hpp"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -7,6 +8,7 @@
 int main() {
     Rocket rocket;
     Telemetry telemetry;
+    TelemetryLogger logger;
 
     rocket.startLaunch();
 
@@ -24,6 +26,8 @@ int main() {
         std::cout << "Orientation - Pitch: " << ori.pitch
                   << ", Yaw: " << ori.yaw
                   << ", Roll: " << ori.roll << "\n";
+        logger.log(rocket.getAltitude(), rocket.getVelocity(),
+                    telemetry.getTemperature(), ori);
         std::cout << "------\n";
 
         if (i == 4) {

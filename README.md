@@ -41,6 +41,27 @@ Orientation - Pitch: 0.245, Yaw: 0.1666, Roll: -1.0192
 Stage 1 separated. Stage 2 ignition!
 ```
 
+## Real-time Visualization
+
+`rocket_sim` now broadcasts telemetry as JSON UDP packets on port 7000.
+You can connect any visualization tool that understands this simple
+format. The following Python snippet demonstrates how to receive the
+data and print each packet:
+
+```python
+import socket
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.bind(("0.0.0.0", 7000))
+
+while True:
+    data, _ = sock.recvfrom(1024)
+    print(data.decode())
+```
+
+Point your visualization software at `udp://localhost:7000` to display
+altitude, velocity, temperature, and orientation in real time.
+
 ## Future Enhancements
 
 The current simulation uses extremely basic equations. Potential improvements include:
