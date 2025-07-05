@@ -2,6 +2,10 @@
 
 RocketApp is a small simulation that models a two-stage rocket launch with very simplified physics. The program demonstrates basic flight dynamics and prints telemetry for each simulated second.
 
+## Project Goals
+
+The long-term vision is to turn RocketApp into a comprehensive spaceflight simulator. Planned features include a full solar system model and an immersive user interface for mission planning and visualization.
+
 ## Building
 
 Use `make` to build the project. The default target produces an executable named `rocket_sim`.
@@ -70,5 +74,5 @@ The current simulation uses extremely basic equations. Potential improvements in
 - Telemetry interfaces for logging and real-time monitoring.
 - Additional stages or control algorithms for guidance.
 
-- Fully simulated visualizer showing real-time flight dynamics, similar to Tesla driver visualizations.
-- Navigation and mission planning to simulate travel to any body in the solar system.
+- A rich, Tesla-style UI with real-time graphical visualization similar to Tesla's driver display.
+- A full solar system model where users can simulate travel to any planet, moon, or location.
