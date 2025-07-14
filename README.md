@@ -70,6 +70,23 @@ altitude, velocity, temperature, and orientation in real time. If your tool
 supports it, you can also render the rocket's position and velocity vectors and
 any bodies included in the optional `bodies` array.
 
+### 3D Telemetry Viewer
+
+A small Python script `telemetry_viewer.py` renders the rocket and any celestial bodies in 3D. Build and run `rocket_sim` in one terminal and start the viewer in another:
+
+```bash
+make
+./rocket_sim
+```
+
+In a separate shell run:
+
+```bash
+python3 telemetry_viewer.py
+```
+
+The viewer listens on UDP port 7000 and updates whenever telemetry is received.
+
 ## Future Enhancements
 
 The current simulation uses extremely basic equations. Potential improvements include:
