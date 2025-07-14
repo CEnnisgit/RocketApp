@@ -32,8 +32,9 @@ int main() {
         std::cout << "Orientation - Pitch: " << ori.pitch
                   << ", Yaw: " << ori.yaw
                   << ", Roll: " << ori.roll << "\n";
-        logger.log(rocket.getAltitude(), rocket.getVelocity(),
-                    telemetry.getTemperature(), ori);
+        logger.logDetailed(rocket.getAltitude(), rocket.getVelocity(),
+                          rocket.getPosition(), rocket.getVelocityVector(),
+                          telemetry.getTemperature(), ori, &system);
         std::cout << "------\n";
 
         if (i == 4) {

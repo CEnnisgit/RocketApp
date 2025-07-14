@@ -47,9 +47,11 @@ Stage 1 separated. Stage 2 ignition!
 
 ## Real-time Visualization
 
-`rocket_sim` now broadcasts telemetry as JSON UDP packets on port 7000.
-You can connect any visualization tool that understands this simple
-format. The following Python snippet demonstrates how to receive the
+`rocket_sim` broadcasts telemetry as JSON UDP packets on port 7000.
+Clients that only care about altitude, velocity, temperature and orientation
+can continue to parse those fields. More advanced visualizers can also use the
+additional position and velocity vectors as well as optional celestial body
+data. The following Python snippet demonstrates how to receive the
 data and print each packet:
 
 ```python
@@ -64,7 +66,9 @@ while True:
 ```
 
 Point your visualization software at `udp://localhost:7000` to display
-altitude, velocity, temperature, and orientation in real time.
+altitude, velocity, temperature, and orientation in real time. If your tool
+supports it, you can also render the rocket's position and velocity vectors and
+any bodies included in the optional `bodies` array.
 
 ## Future Enhancements
 
