@@ -1,6 +1,7 @@
 #ifndef TELEMETRY_HPP
 #define TELEMETRY_HPP
 
+#include "CelestialBody.hpp" // for Vec3
 struct Orientation {
     double pitch; // Nose up/down angle
     double yaw;   // Nose left/right
@@ -9,22 +10,24 @@ struct Orientation {
 
 class Rocket; // forward declaration
 
+class SolarSystem; // forward declaration
+
 class Telemetry {
 private:
-    double altitude;
-    double velocity;
-    double acceleration;
+    Vec3 position;
+    Vec3 velocity;
+    Vec3 acceleration;
     double temperature;
     Orientation orientation;
 
 public:
     Telemetry();
 
-    void update(double deltaTime, Rocket* rocket = nullptr);
+    void update(double deltaTime, Rocket* rocket = nullptr, const SolarSystem* system = nullptr);
 
-    double getAltitude() const;
-    double getVelocity() const;
-    double getAcceleration() const;
+    double getAltitude() const;           // z position
+    double getVelocity() const;           // magnitude
+    double getAcceleration() const;       // magnitude
     double getTemperature() const;
     Orientation getOrientation() const;
 };
