@@ -1,11 +1,17 @@
 #include "Rocket.hpp"
 #include "Telemetry.hpp"
 #include "TelemetryLogger.hpp"
+#include "SolarSystem.hpp"
+#include "CelestialBody.hpp"
 #include <iostream>
 #include <thread>
 #include <chrono>
 
 int main() {
+    SolarSystem system;
+    CelestialBody earth("Earth", 5.972e24, 6371e3);
+    system.addBody(earth);
+
     Rocket rocket;
     Telemetry telemetry;
     TelemetryLogger logger;
@@ -14,8 +20,8 @@ int main() {
 
     for (int i = 0; i < 10; ++i) {
         // Telemetry provides orientation feedback before rocket update
-        telemetry.update(1.0, &rocket);
-        rocket.update(1.0);
+        telemetry.update(1.0, &rocket, &system);
+        rocket.update(1.0, &system);
 
         std::cout << "Time: " << (i + 1) << "s\n";
         std::cout << "Rocket Altitude: " << rocket.getAltitude() << " m\n";

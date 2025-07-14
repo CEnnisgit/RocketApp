@@ -3,12 +3,15 @@
 
 #include <string>
 #include "Telemetry.hpp" // for Orientation struct
+#include "CelestialBody.hpp" // for Vec3
+
+class SolarSystem; // forward declaration
 
 class Rocket {
 private:
     double fuelLevel;         // in percentage (0-100)
-    double altitude;          // in meters
-    double velocity;          // in m/s
+    Vec3 position;            // in meters
+    Vec3 velocity;            // in m/s
     double mass;              // in kilograms
     double thrust;            // in Newtons
     double dragCoefficient;   // simplistic drag coefficient
@@ -20,7 +23,7 @@ public:
     Rocket();
     
     void startLaunch();
-    void update(double deltaTime);  // simulate flight each second
+    void update(double deltaTime, const SolarSystem* system = nullptr);  // simulate flight each second
     void stageSeparation();
     void abortMission();
 
@@ -29,8 +32,10 @@ public:
     Orientation getOrientation() const;
 
     double getFuelLevel() const;
-    double getAltitude() const;
-    double getVelocity() const;
+    Vec3 getPosition() const;
+    Vec3 getVelocityVector() const;
+    double getAltitude() const;      // z position
+    double getVelocity() const;      // magnitude
     std::string getStatus() const;
 };
 
