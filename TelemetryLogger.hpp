@@ -4,6 +4,9 @@
 #include <string>
 #include <netinet/in.h>
 #include "Telemetry.hpp" // for Orientation struct
+#include "CelestialBody.hpp" // for Vec3 and CelestialBody info
+
+class SolarSystem; // forward declaration
 
 class TelemetryLogger {
 public:
@@ -13,6 +16,10 @@ public:
     bool initialize();
     void log(double altitude, double velocity,
              double temperature, const Orientation& orientation);
+    void logDetailed(double altitude, double velocity,
+                     const Vec3& position, const Vec3& velocityVec,
+                     double temperature, const Orientation& orientation,
+                     const SolarSystem* system = nullptr);
 
 private:
     std::string host_;
