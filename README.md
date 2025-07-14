@@ -76,3 +76,29 @@ The current simulation uses extremely basic equations. Potential improvements in
 
 - A rich, Tesla-style UI with real-time graphical visualization similar to Tesla's driver display.
 - A full solar system model where users can simulate travel to any planet, moon, or location.
+
+## Solar System Placeholder Example
+
+The codebase now includes basic `CelestialBody` and `SolarSystem` classes. The
+following snippet demonstrates creating a simple Earth–Moon system and running
+a few simulation steps:
+
+```cpp
+#include "SolarSystem.hpp"
+
+int main() {
+    SolarSystem system;
+    CelestialBody earth("Earth", 5.972e24, 6371e3);
+    CelestialBody moon("Moon", 7.342e22, 1737e3, {384.4e6, 0, 0}, {0, 1022, 0});
+
+    system.addBody(earth);
+    system.addBody(moon);
+
+    // Advance the system by one hour per step
+    for (int i = 0; i < 10; ++i) {
+        system.update(3600);
+        auto positions = system.getPositions();
+        // positions[0] is Earth, positions[1] is Moon
+    }
+}
+```
